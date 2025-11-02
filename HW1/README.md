@@ -74,6 +74,7 @@ class SoftverskiInzenjer(
     init{ println("Konstruisan softverski inzenjer!")} //radi pracenja ispisa, sta se kad kreira i koji konstruktor se  okine
 
     fun getProjekti():Int{return brojProjekata} //getter za brojProjekata
+    fun jeLiUspjesan():String{if (brojProjekata>5)  return "Uspjesan/na je" else return "Nije uspjesan/na"}
 
     override fun toString():String{  //override toString radi ljepseg ispisa
         return """--- Profil Inženjera ---
@@ -100,6 +101,7 @@ class InzenjerElektrotehnike(
     init{ println("Konstruisan Inzenjer elektrotehnike!")} //radi pracenja procesa konstrukcije  kao i kod softverskog inzenjera 
  
     fun getCertifikati():Int{return brojCertifikata} //getter za certifikate 
+    fun jeLiUspjesan():String{if (brojCertifikata>5)  return "Uspjesan/na je" else return "Nije uspjesan/na"}
 
     override fun toString():String{         //override toStringa radi ljepseg ispisa 
         return """--- Profil Inženjera ---
@@ -250,5 +252,14 @@ fun main() {
     check(resultAggregate==20){"Greska u provjeri rezultat aggregate funkcije"}
     println("Aggregate check: OK")
     println(resultAggregate)
+    println("===============================")
+
+    //testiranje uspjesnosti inzenjera
+    listaInzenjera.forEach { inzenjer ->
+        if(inzenjer.titula()=="Inzenjer elektrotehnike")
+            println(inzenjer.identitet() + ":" + (inzenjer as InzenjerElektrotehnike).jeLiUspjesan())
+        else if(inzenjer.titula() =="Softverski inzenjer")
+            println(inzenjer.identitet() + ":"+ (inzenjer as SoftverskiInzenjer).jeLiUspjesan())
+    }
 }
 ```
