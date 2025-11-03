@@ -77,6 +77,7 @@ Broj projekata: $brojProjekata
 
 }
 
+
 class InzenjerElektrotehnike(
     private val ime:String,
     private val prezime:String,
@@ -98,6 +99,27 @@ Broj certifikata: $brojCertifikata
 =============================="""
     }
 }
+
+//provjera zadace
+class PripravnikInzenjer(
+    private val ime:String,
+    private val prezime:String,
+    private val godineIskustva:Int,
+    private val skupEkspertiza:List<String>,
+    private val trajanjePrakse:Int
+):Inzenjer(ime, prezime, "Pripravnik inzenjer", godineIskustva, skupEkspertiza){
+
+    fun getPraksu():Int{return trajanjePrakse}
+
+
+}
+
+fun internEngineerStats(lista:List<PripravnikInzenjer>){
+    var ukupnoTrajanjePrakse = 0
+    lista.forEach { it -> ukupnoTrajanjePrakse += it.getPraksu() }
+    println("Ukupno trajanje: "+ ukupnoTrajanjePrakse + " mjesec, prosjek:  " + (ukupnoTrajanjePrakse/lista.size).toDouble() + " mjeseci")
+}
+
 
 
 // TACKA 4. - grupisanje sa fold()
@@ -149,6 +171,15 @@ fun aggregateInzenjeri(lista:List<Inzenjer>):Int {
 
 //TESTNI MAIN
 fun main() {
+    //dodano za testiranje zadatka sa provjere 
+    val testnaLista = listOf<PripravnikInzenjer>(
+        PripravnikInzenjer("Ajla", "Bulic", 7, listOf("Kotlin", "Android", "Java"), 6),
+        PripravnikInzenjer("Adnan", "Mesic", 7, listOf("Kotlin", "Android", "Java"), 12),
+        PripravnikInzenjer("Lejla", "Muhic", 7, listOf("Kotlin", "Android", "Java"), 3)
+    )
+    println("=========PROVJERA ZADATKA===========")
+    internEngineerStats(testnaLista)
+    println("====================================")
 
     //kreireana lista inzenjera raznih profila
     val listaInzenjera = listOf<Inzenjer>(
